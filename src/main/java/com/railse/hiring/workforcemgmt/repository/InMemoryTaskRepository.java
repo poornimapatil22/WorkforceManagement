@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 
         public InMemoryTaskRepository() {
-            // Seed data
+
             createSeedTask(101L, ReferenceType.ORDER, Task.CREATE_INVOICE, 1L, TaskStatus.ASSIGNED, Priority.HIGH);
             createSeedTask(101L, ReferenceType.ORDER, Task.ARRANGE_PICKUP, 1L, TaskStatus.COMPLETED, Priority.HIGH);
             createSeedTask(102L, ReferenceType.ORDER, Task.CREATE_INVOICE, 2L, TaskStatus.ASSIGNED, Priority.MEDIUM);
@@ -55,6 +55,12 @@ import java.util.stream.Collectors;
         }
 
 
+        @Override
+        public List<TaskManagement> findByAssigneeId(Long assigneeId) {
+            return taskStore.values().stream()
+                    .filter(task -> task.getAssigneeId().equals(assigneeId))
+                    .collect(Collectors.toList());
+        }
         @Override
         public Optional<TaskManagement> findById(Long id) {
             return Optional.ofNullable(taskStore.get(id));

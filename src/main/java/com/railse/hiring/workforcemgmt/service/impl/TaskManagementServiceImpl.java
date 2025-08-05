@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -110,10 +111,10 @@ import java.util.stream.Collectors;
         public List<TaskManagementDto> fetchTasksByDate(TaskFetchByDateRequest request) {
             List<TaskManagement> tasks = taskRepository.findByAssigneeIdIn(request.getAssigneeIds());
             List<TaskManagement> filteredTasks = tasks.stream()
-                    .filter(task -> task.getStatus() != TaskStatus.CANCELLED)
-                    .filter(task -> task.getTaskDeadlineTime() != null
-                            && task.getTaskDeadlineTime() >= request.getStartDate()
-                            && task.getTaskDeadlineTime() <= request.getEndDate())
+                    .filter(task -> task.getStatus() != TaskStatus.CANCELLED && task.getStatus() != TaskStatus.COMPLETED)
+                    .filter(task -> task.getTaskDeadlineTime() != null &&
+                            (task.getTaskDeadlineTime() >= request.getStartDate() && task.getTaskDeadlineTime() <= request.getEndDate()
+                                    || (task.getStartDate() != null && task.getStartDate().before(new Date(request.getStartDate())) && task.getStatus() == TaskStatus.ASSIGNED)))
                     .collect(Collectors.toList());
             return taskMapper.modelListToDtoList(filteredTasks);
         }

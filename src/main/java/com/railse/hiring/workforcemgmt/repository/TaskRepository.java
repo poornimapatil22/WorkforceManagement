@@ -14,8 +14,8 @@ public interface TaskRepository {
     List<TaskManagement> findAll();
     List<TaskManagement> findByReferenceIdAndReferenceType(Long referenceId, com.railse.hiring.workforcemgmt.common.model.enums.ReferenceType referenceType);
     List<TaskManagement> findByAssigneeIdIn(List<Long> assigneeIds);
-    public List<TaskManagement> findByPriority(Priority priority);
-
+     List<TaskManagement> findByPriority(Priority priority);
+    List<TaskManagement> findByAssigneeId(Long assigneeId);
     List<TaskManagement> findTasksForDailyView(Date startDate, Date endDate);
 
 }

@@ -8,7 +8,6 @@ import java.util.Date;
 public class ActivityHistory  {
     private Long taskId;
     private String activity;
-
     private Date timestamp;
 
 }
