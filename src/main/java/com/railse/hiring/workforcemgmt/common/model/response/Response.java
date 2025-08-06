@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.railse.hiring.workforcemgmt.common.exception.StatusCode;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
-
-@Data
+    @Data
     @NoArgsConstructor
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public class Response<T> {

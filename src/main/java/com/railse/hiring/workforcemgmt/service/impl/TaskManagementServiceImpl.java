@@ -87,21 +87,21 @@ import java.util.stream.Collectors;
                         .filter(t -> t.getTask() == taskType && t.getStatus() != TaskStatus.COMPLETED && t.getStatus() != TaskStatus.CANCELLED)
                         .collect(Collectors.toList());
                 if (!tasksOfType.isEmpty()) {
-                    // Cancel all existing tasks
+
                     for (TaskManagement taskToCancel : tasksOfType) {
                         taskToCancel.setStatus(TaskStatus.CANCELLED);
                         taskRepository.save(taskToCancel);
                     }
                 }
-                // Create a new task
+
                 TaskManagement newTask = new TaskManagement();
                 newTask.setReferenceId(request.getReferenceId());
                 newTask.setReferenceType(request.getReferenceType());
                 newTask.setTask(taskType);
                 newTask.setAssigneeId(request.getAssigneeId());
                 newTask.setStatus(TaskStatus.ASSIGNED);
-                // Set task deadline time (replace with actual logic)
-                newTask.setTaskDeadlineTime(System.currentTimeMillis() + 86400000); // 1 day from now
+
+                newTask.setTaskDeadlineTime(System.currentTimeMillis() + 86400000);
                 taskRepository.save(newTask);
             }
             return "Tasks assigned successfully for reference " + request.getReferenceId();

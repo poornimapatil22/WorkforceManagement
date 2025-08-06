@@ -34,8 +34,8 @@ import java.util.stream.Collectors;
             createSeedTask(101L, ReferenceType.ORDER, Task.ARRANGE_PICKUP, 1L, TaskStatus.COMPLETED, Priority.HIGH);
             createSeedTask(102L, ReferenceType.ORDER, Task.CREATE_INVOICE, 2L, TaskStatus.ASSIGNED, Priority.MEDIUM);
             createSeedTask(201L, ReferenceType.ENTITY, Task.ASSIGN_CUSTOMER_TO_SALES_PERSON, 2L, TaskStatus.ASSIGNED, Priority.LOW);
-            createSeedTask(201L, ReferenceType.ENTITY, Task.ASSIGN_CUSTOMER_TO_SALES_PERSON, 3L, TaskStatus.ASSIGNED, Priority.LOW); // Duplicate for Bug #1
-            createSeedTask(103L, ReferenceType.ORDER, Task.COLLECT_PAYMENT, 1L, TaskStatus.CANCELLED, Priority.MEDIUM); // For Bug #2
+            createSeedTask(201L, ReferenceType.ENTITY, Task.ASSIGN_CUSTOMER_TO_SALES_PERSON, 3L, TaskStatus.ASSIGNED, Priority.LOW);
+            createSeedTask(103L, ReferenceType.ORDER, Task.COLLECT_PAYMENT, 1L, TaskStatus.CANCELLED, Priority.MEDIUM);
         }
 
 
@@ -50,7 +50,7 @@ import java.util.stream.Collectors;
             newTask.setStatus(status);
             newTask.setPriority(priority);
             newTask.setDescription("This is a seed task.");
-            newTask.setTaskDeadlineTime(System.currentTimeMillis() + 86400000); // 1 day from now
+            newTask.setTaskDeadlineTime(System.currentTimeMillis() + 86400000);
             taskStore.put(newId, newTask);
         }
 
